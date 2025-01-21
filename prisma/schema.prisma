@@ -7,7 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model product {
+model Product {
   id        String @id @default(auto()) @map("_id") @db.ObjectId
   proCode   String
   proDetail String
@@ -16,4 +16,5 @@ model product {
   /// Multiple data types found: String: 50%, Int: 50% out of 2 sampled entries
   proQty    Json
   proUnit   String
+  @@map("product")
 }
