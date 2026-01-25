@@ -1,86 +1,114 @@
 'use client'
 
-import React, { use } from "react";
-import AppBar  from "@mui/material/AppBar";
-import Toolbar  from "@mui/material/Toolbar";
+import React from "react";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
 import Typography from '@mui/material/Typography'
 import Link from "@mui/material/Link";
 import NextLink from 'next/link'
-
 import { usePathname } from "next/navigation";
-import { Button } from "@mui/material";
+import { Button, IconButton, Badge } from "@mui/material";
 import Container from "@mui/material/Container";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { useCart } from "../../context/CartContext";
+import { useAuth } from "../../context/AuthContext";
 
 export default function AppHeader() {
-    const pathname = usePathname();
+  const pathname = usePathname();
+  const { cartItems } = useCart();
+  const { user, logout } = useAuth();
+
+  // Calculate total items
+  const cartCount = cartItems.reduce((acc, item) => acc + (item.quantity || 1), 0);
+
   return (
-    <Container>
-      <AppBar
-      position="static"
-      color="default"
+    <AppBar
+      position="sticky"
       elevation={0}
-      sx={{ borderBottom: (theme)=> `1px solid ${theme.palette.divider}` }}
-       >
-        <Toolbar sx={{ flexWrap: "wrap"}}>
-        <Typography variant="h6" color="inherit" noWrap sx={{flexGrow: 1}}>
-            IT SUPHAN SHOP
-        </Typography>
-        <nav>
+      sx={{
+        backgroundColor: 'white',
+        borderBottom: '1px solid #e0e0e0',
+        color: 'text.primary'
+      }}
+    >
+      <Toolbar sx={{ px: { xs: 2, sm: 4 }, minHeight: '100px !important', py: 2 }}>
+        <NextLink href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', marginRight: 'auto' }}>
+          <img
+            src="/logo.png"
+            alt="IT Natthawut Shop"
+            style={{ height: '200px', width: 'auto' }}
+          />
+        </NextLink>
+
+        <nav style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          {['/', '/abount', '/contact'].map((path) => {
+            const labels: { [key: string]: string } = { '/': 'Home', '/abount': 'About', '/contact': 'Contact' };
+            return (
+              <Link
+                key={path}
+                underline="none"
+                component={NextLink}
+                variant="button"
+                color={pathname === path ? "primary" : "text.secondary"}
+                href={path}
+                sx={{ my: 1, mx: 3, fontWeight: pathname === path ? 700 : 500, fontSize: '1.3rem', textTransform: 'uppercase' }}
+              >
+                {labels[path]}
+              </Link>
+            )
+          })}
+
+          {user && (
             <Link
-            underline={pathname == "/" ? "always" : "none"}
-            component={NextLink}
-            variant="button"
-            color="primary"
-            href="/"
-            replace
-            sx={{ my:1, mx: 1.5}}
+              underline="none"
+              component={NextLink}
+              variant="button"
+              color={pathname === '/orders' ? "primary" : "text.secondary"}
+              href="/orders"
+              sx={{ my: 1, mx: 2, fontWeight: pathname === '/orders' ? 700 : 500, fontSize: '1.2rem' }}
             >
-            Home
+              คำสั่งซื้อของฉัน
             </Link>
-            <Link
-            underline={pathname == "/abount" ? "always" : "none"}
+          )}
+
+          <IconButton
             component={NextLink}
-            variant="button"
+            href="/cart"
             color="primary"
-            href="/abount"
-            replace
-            sx={{ my:1, mx: 1.5}}
+            sx={{ ml: 2, mr: 2 }}
+            size="large"
+          >
+            <Badge badgeContent={cartCount} color="error">
+              <ShoppingCartIcon sx={{ fontSize: '1.8rem' }} />
+            </Badge>
+          </IconButton>
+
+          {user ? (
+            <>
+              <Typography variant="body1" sx={{ mx: 2, color: 'text.primary', fontWeight: 700, fontSize: '1.15rem' }}>
+                {user.name}
+              </Typography>
+              <Button
+                onClick={logout}
+                variant="outlined"
+                color="error"
+                sx={{ ml: 1, borderRadius: '20px', fontSize: '1rem', px: 3, py: 1 }}
+              >
+                Logout
+              </Button>
+            </>
+          ) : (
+            <Button
+              component={NextLink}
+              href="/login"
+              variant="outlined"
+              sx={{ ml: 1, borderRadius: '20px', fontSize: '1rem', px: 3, py: 1 }}
             >
-            About Us
-            </Link>
-            <Link
-            underline={pathname == "/contact" ? "always" : "none"}
-            component={NextLink}
-            variant="button"
-            color="primary"
-            href="/contact"
-            replace
-            sx={{ my:1, mx: 1.5}}
-            >
-            Contact Us
-            </Link>
-            <Link
-            underline={pathname == "/product" ? "always" : "none"}
-            component={NextLink}
-            variant="button"
-            color="primary"
-            href="/product"
-            replace
-            sx={{ my:1, mx: 1.5}}
-            >
-            Product
-            </Link>
+              Login
+            </Button>
+          )}
         </nav>
-        <Button
-        LinkComponent={NextLink}
-        href="/login"
-        variant="outlined"
-        sx={{ my:1, mx: 1.5}}
-        >
-            Login
-        </Button>
-        </Toolbar>
-      </AppBar>
-    </Container>
+      </Toolbar>
+    </AppBar>
   );
 }

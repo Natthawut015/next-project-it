@@ -1,41 +1,32 @@
-import { Container, Divider, Grid, Paper, Typography } from "@mui/material";
-import AppLogo from "./components/AppLogo";
-import Image from "next/image";
+import React from "react";
+import { Container, Typography, Box } from "@mui/material";
+import prisma from "@/app/lib/db";
+import ProductList from "./components/ProductList";
 
-async function getData(){
-  const response = await fetch('https://dummyjson.com/products',{cache: 'no-store'})
+export const dynamic = 'force-dynamic';
 
-  if(!response.ok){
-        throw new Error("ไม่สามารถ Fetch Data ได้")
-  }
-  return response.json()
+async function getProducts() {
+  const products = await prisma.product.findMany({
+    orderBy: { createdAt: "desc" },
+  });
+  return products;
 }
-export default async function Home(){
-  const response  = await getData()
-  return(
-    <Container>
-      <h1>Product</h1>
-      {
-        response.products && (
-          <>
-          <Grid>
-            {
-              response.products.map((item: any) =>{
-                return(<Grid item key={item.id} lg={3} xs={6}>
-                  <Paper>
-                    <Image src={item.thumbnail} alt={item.detail} width={150} height={150} />
-                    <Divider/>
-                    <Typography>{item.title}</Typography>
-                  </Paper>
-                </Grid>)
-              })
-            }
-          </Grid>
-          </>
-        )
-      }
-      <AppLogo title="Logo One" colors="green"/>
-      <AppLogo title="Logo Two" colors="blue"/>
+
+export default async function Home() {
+  const products = await getProducts();
+
+  return (
+    <Container maxWidth="lg">
+      <Box sx={{ my: 4, textAlign: 'center' }}>
+        <Typography variant="h3" component="h1" gutterBottom fontWeight="800" sx={{ background: 'linear-gradient(45deg, #1e88e5, #5e35b1)', backgroundClip: 'text', textFillColor: 'transparent', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+          ยินดีต้อนรับสู่ร้าน IT Natthawut
+        </Typography>
+        <Typography variant="h6" color="text.secondary" gutterBottom>
+          อุปกรณ์ไอทีคุณภาพสำหรับทุกรูปแบบการใช้งาน
+        </Typography>
+      </Box>
+
+      <ProductList products={products} />
     </Container>
   );
 }
