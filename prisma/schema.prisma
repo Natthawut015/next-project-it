@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
@@ -11,7 +11,7 @@ model Product {
   id        Int      @id @default(autoincrement())
   proCode   String   @unique
   proName   String
-  proDetail String?  @db.Text
+  proDetail String?
   proPrice  Float
   proImage  String?
   createdAt DateTime @default(now())
@@ -24,7 +24,7 @@ model Product {
 model Order {
   id              Int      @id @default(autoincrement())
   customerName    String
-  customerAddress String?  @db.Text
+  customerAddress String?
   totalAmount     Float
   status          String   @default("PENDING") // PENDING, COMPLETED, CANCELLED
   shippingStatus  String   @default("PREPARING") // PREPARING, SHIPPED, DELIVERED
