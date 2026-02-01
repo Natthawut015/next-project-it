@@ -7,14 +7,26 @@ import CategoryListWrapper from "./components/CategoryListWrapper";
 export const dynamic = 'force-dynamic';
 
 async function getProducts(category?: string) {
-  // Use raw SQL to avoid the "Unknown argument proCategory" error caused by out-of-sync Prisma Client
-  if (category) {
-    return await prisma.$queryRawUnsafe(
-      `SELECT * FROM product WHERE proCategory = ? ORDER BY createdAt DESC`,
-      category
-    ) as any;
+  try {
+    if (category) {
+      return await prisma.product.findMany({
+        where: {
+          proCategory: category
+        },
+        orderBy: {
+          createdAt: 'desc'
+        }
+      });
+    }
+    return await prisma.product.findMany({
+      orderBy: {
+        createdAt: 'desc'
+      }
+    });
+  } catch (error) {
+    console.error("Prisma error in getProducts:", error);
+    return [];
   }
-  return await prisma.$queryRawUnsafe(`SELECT * FROM product ORDER BY createdAt DESC`) as any;
 }
 
 export default async function Home({
