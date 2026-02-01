@@ -16,7 +16,24 @@ async function main() {
         { name: 'ชุดระบายความร้อน', key: 'cooling' },
     ]
 
+    const categoryImages = {
+        'โน๊ตบุ๊ค': 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=800&q=80',
+        'คอมพิวเตอร์ตั้งโต๊ะ': 'https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=800&q=80',
+        'แท็บเล็ต': 'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=800&q=80',
+        'ซีพียู': 'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=800&q=80',
+        'การ์ดจอ': 'https://images.unsplash.com/photo-1591488320449-011701bb6704?w=800&q=80',
+        'เมนบอร์ด': 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80',
+        'แรม': 'https://images.unsplash.com/photo-1562976540-1502c2145186?w=800&q=80',
+        'ฮาร์ดดิสก์ และ เอสเอสดี': 'https://images.unsplash.com/photo-1597852074816-d933c4d2b988?w=800&q=80',
+        'พาวเวอร์ซัพพลาย': 'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=800&q=80',
+        'เคส': 'https://images.unsplash.com/photo-1587202372162-6383f05bc0bb?w=800&q=80',
+        'ชุดระบายความร้อน': 'https://images.unsplash.com/photo-1614935151651-0bea6508db6b?w=800&q=80'
+    }
+
     const products = []
+
+    // Helper to get image or default
+    const getImg = (cat) => categoryImages[cat] || `https://picsum.photos/seed/${cat}/400/300`;
 
     // Notebooks
     for (let i = 1; i <= 10; i++) {
@@ -26,7 +43,7 @@ async function main() {
             proDetail: `High performance notebook with latest specs. RAM 16GB, SSD 512GB. Perfect for work and gaming.`,
             proPrice: 25000 + (i * 1500),
             proCategory: 'โน๊ตบุ๊ค',
-            proImage: `https://picsum.photos/seed/nb${i}/400/300`,
+            proImage: getImg('โน๊ตบุ๊ค'),
         })
     }
 
@@ -38,7 +55,7 @@ async function main() {
             proDetail: `Powerful gaming desktop with RGB lighting. Intel Core i7, RTX GPU included.`,
             proPrice: 30000 + (i * 2000),
             proCategory: 'คอมพิวเตอร์ตั้งโต๊ะ',
-            proImage: `https://picsum.photos/seed/dt${i}/400/300`,
+            proImage: getImg('คอมพิวเตอร์ตั้งโต๊ะ'),
         })
     }
 
@@ -50,7 +67,7 @@ async function main() {
             proDetail: `Lightweight and powerful tablet for creative professionals. 120Hz display.`,
             proPrice: 15000 + (i * 1000),
             proCategory: 'แท็บเล็ต',
-            proImage: `https://picsum.photos/seed/tb${i}/400/300`,
+            proImage: getImg('แท็บเล็ต'),
         })
     }
 
@@ -62,7 +79,7 @@ async function main() {
             proDetail: `Latest generation processor with multi-threading support for heavy multitasking.`,
             proPrice: 5000 + (i * 800),
             proCategory: 'ซีพียู',
-            proImage: `https://picsum.photos/seed/cpu${i}/400/300`,
+            proImage: getImg('ซีพียู'),
         })
     }
 
@@ -74,7 +91,7 @@ async function main() {
             proDetail: `High-end graphics card for 4K gaming and professional rendering tasks.`,
             proPrice: 12000 + (i * 2500),
             proCategory: 'การ์ดจอ',
-            proImage: `https://picsum.photos/seed/gpu${i}/400/300`,
+            proImage: getImg('การ์ดจอ'),
         })
     }
 
@@ -86,7 +103,7 @@ async function main() {
             proDetail: `Modern motherboard with PCIe 5.0 support and multiple M.2 slots.`,
             proPrice: 4000 + (i * 500),
             proCategory: 'เมนบอร์ด',
-            proImage: `https://picsum.photos/seed/mb${i}/400/300`,
+            proImage: getImg('เมนบอร์ด'),
         })
     }
 
@@ -98,7 +115,7 @@ async function main() {
             proDetail: `High-speed overclocked memory with low latency and RGB heatsink.`,
             proPrice: 2000 + (i * 300),
             proCategory: 'แรม',
-            proImage: `https://picsum.photos/seed/ram${i}/400/300`,
+            proImage: getImg('แรม'),
         })
     }
 
@@ -110,7 +127,7 @@ async function main() {
             proDetail: `Fast and reliable storage solution for your data and OS. High read/write speeds.`,
             proPrice: 1500 + (i * 400),
             proCategory: 'ฮาร์ดดิสก์ และ เอสเอสดี',
-            proImage: `https://picsum.photos/seed/st${i}/400/300`,
+            proImage: getImg('ฮาร์ดดิสก์ และ เอสเอสดี'),
         })
     }
 
@@ -122,7 +139,7 @@ async function main() {
             proDetail: `Stable and efficient power supply unit with modular cables.`,
             proPrice: 2500 + (i * 350),
             proCategory: 'พาวเวอร์ซัพพลาย',
-            proImage: `https://picsum.photos/seed/psu${i}/400/300`,
+            proImage: getImg('พาวเวอร์ซัพพลาย'),
         })
     }
 
@@ -134,7 +151,7 @@ async function main() {
             proDetail: `Steel case with tempered glass side panel and excellent airflow design.`,
             proPrice: 1800 + (i * 300),
             proCategory: 'เคส',
-            proImage: `https://picsum.photos/seed/cs${i}/400/300`,
+            proImage: getImg('เคส'),
         })
     }
 
@@ -146,7 +163,7 @@ async function main() {
             proDetail: `Advanced cooling system to keep your CPU temperature low under load.`,
             proPrice: 1200 + (i * 450),
             proCategory: 'ชุดระบายความร้อน',
-            proImage: `https://picsum.photos/seed/cl${i}/400/300`,
+            proImage: getImg('ชุดระบายความร้อน'),
         })
     }
 
