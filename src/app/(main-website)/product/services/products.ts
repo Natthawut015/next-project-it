@@ -1,22 +1,21 @@
 import prisma from "@/app/lib/db";
-import exp from "constants";
 
 export async function findAllProduct() {
     return await prisma.product.findMany({
-        orderBy: {id: "desc"}
+        orderBy: { id: "desc" }
     })
 }
-export function findByIdProduct(id: string){
+export function findByIdProduct(id: string) {
     return prisma.product.findUnique({
-        where: { id: id}
+        where: { id: parseInt(id) }
     })
 }
-export function createProduct(){
+export function createProduct() {
 
 }
-export function updateProudct(){
+export function updateProudct() {
 
 }
-export function removeProduct(){
+export function removeProduct() {
 
 }
