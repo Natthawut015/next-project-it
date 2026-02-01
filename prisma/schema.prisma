@@ -8,15 +8,16 @@ datasource db {
 }
 
 model Product {
-  id        Int      @id @default(autoincrement())
-  proCode   String   @unique
-  proName   String
-  proDetail String?
-  proPrice  Float
-  proImage  String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  orderItems OrderItem[]
+  id          Int      @id @default(autoincrement())
+  proCode     String   @unique
+  proName     String
+  proDetail   String?
+  proPrice    Float
+  proCategory String?  // Added category field
+  proImage    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  orderItems  OrderItem[]
 
   @@map("product")
 }

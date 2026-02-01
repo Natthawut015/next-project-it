@@ -1,32 +1,63 @@
 import React from "react";
-import { Container, Typography, Box } from "@mui/material";
+import { Container, Typography, Box, Grid } from "@mui/material";
 import prisma from "@/app/lib/db";
 import ProductList from "./components/ProductList";
+import CategoryListWrapper from "./components/CategoryListWrapper";
 
 export const dynamic = 'force-dynamic';
 
-async function getProducts() {
-  const products = await prisma.product.findMany({
-    orderBy: { createdAt: "desc" },
-  });
-  return products;
+async function getProducts(category?: string) {
+  // Use raw SQL to avoid the "Unknown argument proCategory" error caused by out-of-sync Prisma Client
+  if (category) {
+    return await prisma.$queryRawUnsafe(
+      `SELECT * FROM product WHERE proCategory = ? ORDER BY createdAt DESC`,
+      category
+    ) as any;
+  }
+  return await prisma.$queryRawUnsafe(`SELECT * FROM product ORDER BY createdAt DESC`) as any;
 }
 
-export default async function Home() {
-  const products = await getProducts();
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: { category?: string };
+}) {
+  const selectedCategory = searchParams.category || "";
+  const products = await getProducts(selectedCategory);
 
   return (
-    <Container maxWidth="lg">
-      <Box sx={{ my: 4, textAlign: 'center' }}>
-        <Typography variant="h3" component="h1" gutterBottom fontWeight="800" sx={{ background: 'linear-gradient(45deg, #1e88e5, #5e35b1)', backgroundClip: 'text', textFillColor: 'transparent', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-          ยินดีต้อนรับสู่ร้าน IT Natthawut
+    <Container maxWidth="xl" sx={{ py: 4 }}>
+      <Box sx={{ mb: 6, textAlign: 'center' }}>
+        <Typography
+          variant="h2"
+          component="h1"
+          gutterBottom
+          fontWeight="900"
+          sx={{
+            color: '#2e7d32', // Matches our green header
+            textShadow: '0 2px 4px rgba(0,0,0,0.1)'
+          }}
+        >
+          ร้าน IT Natthawut
         </Typography>
-        <Typography variant="h6" color="text.secondary" gutterBottom>
-          อุปกรณ์ไอทีคุณภาพสำหรับทุกรูปแบบการใช้งาน
+        <Typography variant="h5" color="text.secondary">
+          แหล่งรวมอุปกรณ์ไอทีครบวงจร คุณภาพดี ราคาเป็นกันเอง
         </Typography>
       </Box>
 
-      <ProductList products={products} />
+      <Grid container spacing={4}>
+        <Grid item xs={12} md={3} lg={2}>
+          <CategoryListWrapper initialCategory={selectedCategory} />
+        </Grid>
+        <Grid item xs={12} md={9} lg={10}>
+          <Box sx={{ mb: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <Typography variant="h5" fontWeight="bold">
+              {selectedCategory || "สินค้าทั้งหมด"} ({products.length})
+            </Typography>
+          </Box>
+          <ProductList products={products} />
+        </Grid>
+      </Grid>
     </Container>
   );
 }

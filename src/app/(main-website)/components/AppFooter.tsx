@@ -14,8 +14,8 @@ function Copyright(props: any) {
       align="center"
       {...props}
     >
-      {"Copyright ©"}
-      <Link color="inherit" href="https://mui.com/">
+      {"ลิขสิทธิ์ © "}
+      <Link color="inherit" href="/">
         IT Natthawut {new Date().getFullYear()}
       </Link>{" "}
     </Typography>
@@ -24,31 +24,31 @@ function Copyright(props: any) {
 
 const footers = [
   {
-    title: "Company",
-    description: ["Team", "History", "Contact us", "Locations"],
+    title: "บริษัท",
+    description: ["ทีมงาน", "ประวัติความเป็นมา", "สถานที่ตั้ง"],
   },
   {
-    title: "Features",
+    title: "ฟีเจอร์",
     description: [
-      "Cool stuff",
-      "Random feature",
-      "Team feature",
-      "Developer stuff",
-      "Another one",
+      "สิ่งที่น่าสนใจ",
+      "ฟีเจอร์สุ่ม",
+      "ฟีเจอร์ทีม",
+      "สำหรับนักพัฒนา",
+      "อื่นๆ",
     ],
   },
   {
-    title: "Resources",
+    title: "แหล่งข้อมูล",
     description: [
-      "Resource",
-      "Resource name",
-      "Another resource",
-      "Final resource",
+      "ทรัพยากร",
+      "ชื่อทรัพยากร",
+      "ทรัพยากรอื่นๆ",
+      "ทรัพยากรสุดท้าย",
     ],
   },
   {
-    title: "Legal",
-    description: ["Privacy policy", "Terms of use"],
+    title: "กฎหมาย",
+    description: ["นโยบายความเป็นส่วนตัว", "ข้อกำหนดการใช้งาน"],
   },
 ];
 

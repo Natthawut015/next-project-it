@@ -38,10 +38,10 @@ export default function RegisterPage() {
             >
                 <Paper elevation={3} sx={{ p: 4, width: '100%', borderRadius: 2 }}>
                     <Typography component="h1" variant="h5" align="center" fontWeight="bold" gutterBottom>
-                        Sign up
+                        สมัครสมาชิก
                     </Typography>
                     <Typography variant="body2" color="text.secondary" align="center" sx={{ mb: 3 }}>
-                        Create an account to start shopping
+                        สร้างบัญชีผู้ใช้งานเพื่อเริ่มสั่งซื้อสินค้า
                     </Typography>
 
                     {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
@@ -52,7 +52,7 @@ export default function RegisterPage() {
                             required
                             fullWidth
                             id="name"
-                            label="Full Name"
+                            label="ชื่อ-นามสกุล"
                             name="name"
                             autoComplete="name"
                             autoFocus
@@ -64,7 +64,7 @@ export default function RegisterPage() {
                             required
                             fullWidth
                             id="email"
-                            label="Email Address"
+                            label="ที่อยู่อีเมล"
                             name="email"
                             autoComplete="email"
                             value={email}
@@ -75,7 +75,7 @@ export default function RegisterPage() {
                             required
                             fullWidth
                             name="password"
-                            label="Password"
+                            label="รหัสผ่าน"
                             type="password"
                             id="password"
                             autoComplete="new-password"
@@ -86,14 +86,14 @@ export default function RegisterPage() {
                             type="submit"
                             fullWidth
                             variant="contained"
-                            sx={{ mt: 3, mb: 2, py: 1.5, fontWeight: 'bold' }}
+                            sx={{ mt: 3, mb: 2, py: 1.5, fontWeight: 'bold', borderRadius: '25px', background: 'linear-gradient(45deg, #2e7d32, #4caf50)' }}
                             disabled={loading}
                         >
-                            {loading ? "Sign Up" : "Sign Up"}
+                            {loading ? "กำลังสมัครสมาชิก..." : "สมัครสมาชิก"}
                         </Button>
                         <Box display="flex" justifyContent="center">
-                            <Link href="/login" style={{ textDecoration: 'none', color: '#1976d2', fontSize: '0.875rem' }}>
-                                {"Already have an account? Sign In"}
+                            <Link href="/login" style={{ textDecoration: 'none', color: '#2e7d32', fontSize: '0.875rem' }}>
+                                {"มีบัญชีอยู่แล้ว? เข้าสู่ระบบที่นี่"}
                             </Link>
                         </Box>
                     </Box>

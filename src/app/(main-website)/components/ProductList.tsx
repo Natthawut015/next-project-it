@@ -39,7 +39,7 @@ export default function ProductList({ products }: { products: any[] }) {
                                     {product.proName}
                                 </Typography>
                                 <Typography variant="body2" color="text.secondary" sx={{ mb: 2, height: '40px', overflow: 'hidden' }}>
-                                    {product.proDetail || "No description available."}
+                                    {product.proDetail || "ไม่มีรายละเอียดสินค้า"}
                                 </Typography>
 
                                 <Box display="flex" justifyContent="space-between" alignItems="center">
@@ -64,11 +64,11 @@ export default function ProductList({ products }: { products: any[] }) {
                                         borderRadius: '8px',
                                         textTransform: 'none',
                                         fontWeight: 600,
-                                        background: 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)',
-                                        boxShadow: '0 3px 5px 2px rgba(33, 203, 243, .3)'
+                                        background: 'linear-gradient(45deg, #2e7d32 30%, #4caf50 90%)', // Changed to green theme
+                                        boxShadow: '0 3px 5px 2px rgba(46, 125, 50, .3)'
                                     }}
                                 >
-                                    Add to Cart
+                                    เพิ่มลงรถเข็น
                                 </Button>
                             </CardActions>
                         </Card>

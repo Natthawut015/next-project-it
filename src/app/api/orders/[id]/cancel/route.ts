@@ -26,7 +26,7 @@ export async function PATCH(
         let userId: number;
         try {
             const decoded = jwt.verify(token.value, JWT_SECRET) as any;
-            userId = decoded.id;
+            userId = decoded.userId;
         } catch (err) {
             return NextResponse.json({ error: "Invalid token" }, { status: 401 });
         }

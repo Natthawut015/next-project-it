@@ -15,9 +15,7 @@ export const metadata: Metadata = {
 
 import { CartProvider } from "../context/CartContext";
 import { AuthProvider } from "../context/AuthContext";
-// ... imports
-
-// ...
+import { ThemeContextProvider } from "../context/ThemeContext";
 
 export default function RootLayout({
   children,
@@ -30,11 +28,13 @@ export default function RootLayout({
         <AppRouterCacheProvider>
           <AuthProvider>
             <CartProvider>
-              <ThemeProvider theme={theme}>
+              <ThemeContextProvider>
                 <AppHeader />
-                {children}
+                <main style={{ minHeight: '80vh' }}>
+                  {children}
+                </main>
                 <AppFooter />
-              </ThemeProvider>
+              </ThemeContextProvider>
             </CartProvider>
           </AuthProvider>
         </AppRouterCacheProvider>

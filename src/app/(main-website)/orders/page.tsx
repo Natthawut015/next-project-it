@@ -76,7 +76,7 @@ export default async function UserOrdersPage() {
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 700 }} aria-label="my orders">
                         <TableHead>
-                            <TableRow sx={{ backgroundColor: "#f5f5f5" }}>
+                            <TableRow>
                                 <TableCell sx={{ fontWeight: "bold" }}>รหัสสั่งซื้อ</TableCell>
                                 <TableCell>วันที่สั่งซื้อ</TableCell>
                                 <TableCell>ยอดรวม</TableCell>

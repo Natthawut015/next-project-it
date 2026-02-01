@@ -37,10 +37,10 @@ export default function LoginPage() {
             >
                 <Paper elevation={3} sx={{ p: 4, width: '100%', borderRadius: 2 }}>
                     <Typography component="h1" variant="h5" align="center" fontWeight="bold" gutterBottom>
-                        Sign in
+                        เข้าสู่ระบบ
                     </Typography>
                     <Typography variant="body2" color="text.secondary" align="center" sx={{ mb: 3 }}>
-                        Welcome back to IT Natthawut Shop
+                        ยินดีต้อนรับกลับสู่ร้าน IT Natthawut
                     </Typography>
 
                     {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
@@ -51,7 +51,7 @@ export default function LoginPage() {
                             required
                             fullWidth
                             id="email"
-                            label="Email Address"
+                            label="ที่อยู่อีเมล"
                             name="email"
                             autoComplete="email"
                             autoFocus
@@ -63,7 +63,7 @@ export default function LoginPage() {
                             required
                             fullWidth
                             name="password"
-                            label="Password"
+                            label="รหัสผ่าน"
                             type="password"
                             id="password"
                             autoComplete="current-password"
@@ -74,14 +74,14 @@ export default function LoginPage() {
                             type="submit"
                             fullWidth
                             variant="contained"
-                            sx={{ mt: 3, mb: 2, py: 1.5, fontWeight: 'bold' }}
+                            sx={{ mt: 3, mb: 2, py: 1.5, fontWeight: 'bold', borderRadius: '25px', background: 'linear-gradient(45deg, #2e7d32, #4caf50)' }}
                             disabled={loading}
                         >
-                            {loading ? "Signing in..." : "Sign In"}
+                            {loading ? "กำลังเข้าสู่ระบบ..." : "เข้าสู่ระบบ"}
                         </Button>
                         <Box display="flex" justifyContent="center">
-                            <Link href="/register" style={{ textDecoration: 'none', color: '#1976d2', fontSize: '0.875rem' }}>
-                                {"Don't have an account? Sign Up"}
+                            <Link href="/register" style={{ textDecoration: 'none', color: '#2e7d32', fontSize: '0.875rem' }}>
+                                {"ยังไม่มีบัญชี? สมัครสมาชิกที่นี่"}
                             </Link>
                         </Box>
                     </Box>
