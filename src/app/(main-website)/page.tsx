@@ -22,8 +22,16 @@ export default async function Home({
 }: {
   searchParams: { category?: string };
 }) {
+  let products = [];
+  try {
+    const selectedCategory = searchParams.category || "";
+    products = await getProducts(selectedCategory);
+    if (!Array.isArray(products)) products = [];
+  } catch (error) {
+    console.error("Failed to fetch products:", error);
+  }
+
   const selectedCategory = searchParams.category || "";
-  const products = await getProducts(selectedCategory);
 
   return (
     <Container maxWidth="xl" sx={{ py: 4 }}>
