@@ -3,6 +3,8 @@ import { Container, Typography, Box, Grid } from "@mui/material";
 import prisma from "@/app/lib/db";
 import ProductList from "./components/ProductList";
 import CategoryListWrapper from "./components/CategoryListWrapper";
+import { Alert, AlertTitle } from "@mui/material";
+import path from "path";
 
 export const dynamic = 'force-dynamic';
 
@@ -64,6 +66,15 @@ export default async function Home({
           แหล่งรวมอุปกรณ์ไอทีครบวงจร คุณภาพดี ราคาเป็นกันเอง
         </Typography>
       </Box>
+
+      {products.length === 0 && (
+        <Alert severity="info" sx={{ mb: 4 }}>
+          <AlertTitle>Database Diagnostic</AlertTitle>
+          ไม่พบข้อมูลสินค้าในฐานข้อมูล (Count: {products.length}) <br />
+          Working Dir: {process.cwd()} <br />
+          Database Path: {path.join(process.cwd(), "prisma", "dev.db")}
+        </Alert>
+      )}
 
       <Grid container spacing={4}>
         <Grid item xs={12} md={3} lg={2}>
