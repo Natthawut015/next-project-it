@@ -34,7 +34,7 @@ export default async function Home({
 }: {
   searchParams: { category?: string };
 }) {
-  let products = [];
+  let products: any[] = [];
   try {
     const selectedCategory = searchParams.category || "";
     products = await getProducts(selectedCategory);
