@@ -30,7 +30,13 @@ const categories = [
 
 export default function CategoryList({ onSelectCategory, selectedCategory }: { onSelectCategory: (cat: string) => void, selectedCategory: string }) {
     return (
-        <Paper sx={{ p: 2, borderRadius: 2, boxShadow: '0 4px 12px rgba(0,0,0,0.05)' }}>
+        <Paper sx={{
+            p: 2,
+            borderRadius: 2,
+            boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
+            position: 'sticky',
+            top: '2rem'
+        }}>
             <Typography variant="h6" fontWeight="bold" sx={{ mb: 2, px: 1 }}>
                 หมวดหมู่สินค้า
             </Typography>
