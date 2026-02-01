@@ -1,15 +1,18 @@
 import { Button, Container, Typography } from "@mui/material";
 import Link from "next/link";
+import Image from "next/image";
 export default function Page() {
   return (
     <Container sx={{ py: 8, textAlign: 'center' }}>
       <Typography variant="h4" sx={{ mb: 4, fontWeight: 700 }}>เกี่ยวกับเรา</Typography>
 
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
-        <img
+        <Image
           src="/profile.jpg"
           alt="นายณัฐวุฒิ จันทร์สุนทร"
-          style={{ width: '250px', height: '250px', borderRadius: '50%', objectFit: 'cover', border: '5px solid #1976d2' }}
+          width={250}
+          height={250}
+          style={{ borderRadius: '50%', objectFit: 'cover', border: '5px solid #1976d2' }}
         />
 
         <div style={{ textAlign: 'center' }}>

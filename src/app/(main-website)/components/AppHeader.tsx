@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography'
 import Link from "@mui/material/Link";
 import NextLink from 'next/link'
 import { usePathname } from "next/navigation";
+import Image from 'next/image'; // Added Image import
 import { Badge, IconButton, Button, Box } from "@mui/material";
 import Container from "@mui/material/Container";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -38,10 +39,12 @@ export default function AppHeader() {
     >
       <Toolbar sx={{ px: { xs: 2, sm: 4 }, minHeight: '80px !important', py: 1 }}>
         <NextLink href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', marginRight: 'auto' }}>
-          <img
+          <Image
             src="/profile.jpg"
             alt="IT Natthawut Shop"
-            style={{ height: '60px', width: 'auto', border: '1px solid white' }}
+            width={60} // Adjusted width to match original height
+            height={60} // Adjusted height to match original height
+            style={{ border: '1px solid white', borderRadius: '4px', objectFit: 'cover' }} // Added borderRadius and objectFit
           />
         </NextLink>
 
