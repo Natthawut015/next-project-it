@@ -12,7 +12,7 @@ async function getProducts(category?: string) {
       return await prisma.product.findMany({
         where: {
           proCategory: category
-        },
+        } as any,
         orderBy: {
           createdAt: 'desc'
         }
